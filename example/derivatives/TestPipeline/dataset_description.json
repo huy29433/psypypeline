@@ -1,0 +1,11 @@
+{
+    "Name": "TestPipeline",
+    "BIDSVersion": "1.1.1",
+    "PipelineDescription": {
+        "Name": "TestPipeline",
+        "Version": "1.1.1",
+        "CodeURL": "404"
+    },
+    "CodeURL": "404",
+    "HowToAcknowledge": "404"
+}

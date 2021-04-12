@@ -1,0 +1,9 @@
+{
+     "TaskName": "Localizer",
+     "Manufacturer": "Brucker",
+     "MagneticFieldStrength": "3T",
+     "PulseSequenceType": "EPI",
+     "EchoTime": 0.03,
+     "RepetitionTime": 2.4,
+     "SliceThickness": "4"
+}

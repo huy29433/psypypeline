@@ -1,0 +1,24 @@
+{
+    "Name": "TestPipeline",
+    "Processes": [
+        {
+            "Name": "denoise",
+            "Readable": "denoised",
+            "Source": "processes.py"
+        },
+        {
+            "Name": "smooth",
+            "Readable": "smoothed",
+            "Source": "processes.py"
+        },
+        {
+            "Name": "EVcentrality",
+            "Readable": "EVcentrality",
+            "Source": "processes.py"
+        }
+    ],
+    "Masks": {
+        "csf": "masks/csf.nii",
+        "rois": "masks/k50_2mm.nii.gz"
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "BIDSVersion": "1.0.2", 
+    "Name": "Brainomics/Localizer",
+    "License": "Creative Commons Attribution-NonCommercial 4.0 International",
+    "Authors": [
+        "Dimitri Papadopoulos Orfanos",
+        "Vincent Michel",
+        "Yannick Schwartza",
+        "Philippe Pinel",
+        "Antonio Moreno",
+        "Denis Le Bihan",
+        "Vincent Frouin"
+    ],
+    "Acknowledgements": "We thank Stanislas Dehaene for his participation to the creation of the Localizer database and Bernadette Martins for helping us navigate through regulatory rules. We thank the Inria-CEA Parietal team and in particular Virgile Fritsch for the Localizer data fetcher in NiLearn.",
+    "HowToAcknowledge": "Papadopoulos Orfanos, D., Michel, V., Schwartz, Y., Pinel, P., Moreno, A., Le Bihan, D., & Frouin, V. (2017). The Brainomics/Localizer database. NeuroImage, 144, 309\u2013314. doi:10.1016/j.neuroimage.2015.09.052",
+    "Funding": [
+        "ANR-10-BINF-04"
+    ],
+    "ReferencesAndLinks": [
+        "Papadopoulos Orfanos, D., Michel, V., Schwartz, Y., Pinel, P., Moreno, A., Le Bihan, D., & Frouin, V. (2017). The Brainomics/Localizer database. NeuroImage, 144, 309\u2013314. doi:10.1016/j.neuroimage.2015.09.052",
+        "Pinel, P., Thirion, B., Meriaux, S., Jobert, A., Serres, J., Le Bihan, D., Poline, J.-B., & Dehaene, S. (2007). Fast reproducible identification and large-scale databasing of individual functional cognitive networks BMC Neurosci., 8 (1) (2007), p. 91, 10.1186/1471-2202-8-91"
+    ]
+}
