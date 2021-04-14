@@ -96,15 +96,22 @@ class Pipeline():
         self.tr = self.layout.get_tr()
         with open(self.layout._get_unique(scope=self.name, suffix="pipeline").path) as file:
             pipeline = json.load(file)
-        os.chdir(os.path.dirname(self.layout._get_unique(
+        sys.path.append(os.path.dirname(self.layout._get_unique(
             scope=self.name, suffix="pipeline").path))
-        self.masks = {mask: Brain_Data(mask_path)
-                      for mask, mask_path in pipeline["Masks"].items()}
+        self.masks = dict()
+        for mask, mask_path in pipeline["Masks"].items():
+            if not os.path.isabs(mask_path):
+                mask_path = join(self.root, "derivatives",
+                                 self.name, mask_path)
+            self.masks[mask] = Brain_Data(mask_path)
 
         # Set up the process dictionary
 
         self.processes = dict()
         for process in pipeline["Processes"]:
+            if not os.path.isabs(process["Source"]):
+                process["Source"] = join(self.root, "derivatives",
+                                         self.name, process["Source"])
             head, tail = os.path.split(os.path.abspath(process["Source"]))
             if tail.endswith(".py"):
                 tail = tail[:-3]
@@ -123,7 +130,7 @@ class Pipeline():
         all_mc.fillna(value=0, inplace=True)
         return Design_Matrix(all_mc, sampling_freq=1/tr)
 
-    def load_data(self, sub, return_type="Brain_Data", write="all", verbose=True, **processes) -> Brain_Data:
+    def load_data(self, sub, return_type="Brain_Data", write="all", verbose=True, reload=True, **processes) -> Brain_Data:
 
         #  We'll use this function to print only when being verbose
         def v_print(*args, **kwargs):
@@ -183,7 +190,8 @@ class Pipeline():
             if write in ["all", "main"]:
                 v_print(f"...writing {name}")
                 data.write(join(path, name))
-                self.layout = BIDSLayout(self.root, derivatives=True)
+                if reload:
+                    self.layout = BIDSLayout(self.root, derivatives=True)
 
         if return_type == "Brain_Data":
             return data
