@@ -130,8 +130,46 @@ class Pipeline():
         all_mc.fillna(value=0, inplace=True)
         return Design_Matrix(all_mc, sampling_freq=1/tr)
 
-    def load_data(self, sub, return_type="Brain_Data", write="all", verbose=True, reload=True, **processes) -> Brain_Data:
+    def load_data(self, sub, return_type="Brain_Data", write="all", force="none", verbose=True, reload=True, **processes) -> Brain_Data:
+        """Load data from pipeline.root/derivatives/pipeline.name and/or applies processes from
+        pipeline.processes to it.
+        By default, first checks wether the processes have been applied and saved before and 
+        then loads them. By default, saves all the intermediate steps
 
+        Parameters
+        ----------
+        sub : str
+            Name of the subject to load the process from.
+        return_type : str, optional
+            Type the return value. Must be one of "path", "Brain_Data". If "path" and write="none" and file does not exist,
+            throws an Error, as path does not exist. By default "Brain_Data"
+        write : str, optional
+            Wether to save the intermediate and the last step when applying processes. Must be one of "none" (no step is saved),
+            "main" (only endresult is saved) or "all" (all intermediate steps are saved). By default "all"
+        force : str, optional
+            Wether to apply processes even though a file of this already exists. Must be one of "none", "main", "all" (see above).
+            By default "none"
+        verbose : bool, optional
+            Wether to be verbose, by default True
+        reload : bool, optional
+            Wether to reload the pipeline.layout after writing a file. Only recommended if computing multiple independend processes.
+            Then, afterwards, should be reloaded by hand (call `pipeline.layout = BIDSLayout(pipeline.root)`
+            , by default True
+
+        Returns
+        -------
+        Brain_Data, str
+            (Un)Processed data or path to where the data is stored
+
+        Raises
+        ------
+        TypeError
+            If wrong return_type is supplied
+        FileNotFoundError
+            If subject is not found
+        KeyError
+            If an unknown process is supplied
+        """
         #  We'll use this function to print only when being verbose
         def v_print(*args, **kwargs):
             if verbose:
